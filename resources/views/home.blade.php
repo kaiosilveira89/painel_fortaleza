@@ -352,6 +352,7 @@ function traduz_task($codigo)
     }
     return $traduz_task;
 }
+
 function filtraAlto($codigo)
     {
         $green = [];
@@ -394,6 +395,7 @@ function filtraBaixo($codigo)
 }
 
 foreach($actions as $action ){
+if($action->data == request("d")){
 
     if($action->id_task == 1)
         {
@@ -435,9 +437,8 @@ foreach($actions as $action ){
                     array_push($redTotal, $action->value);
                 }
         }
-    else
-    {
-    }
+    else {    }
+    }else {    }
 }
 
 ?>

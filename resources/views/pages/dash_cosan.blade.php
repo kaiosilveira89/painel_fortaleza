@@ -147,9 +147,47 @@ function traduz_task($codigo)
         <canvas style="height:400px !important; flex-grow: 1" id="myChart"></canvas>
     </div>
 
+    <div class="container">
+
+        <h2>Série Histórica</h2>
+
+        <br>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>UNIDADE</th>
+                <th>AÇÃO</th>
+                <th>DATA</th>
+                <th>QUANTIDADE</th>
+                {{--                        <th>TESTE</th>--}}
+                {{--                        <th>TESTE 2</th>--}}
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            @foreach($actions->sortByDesc('data') as $action)
+                @if($action->id_equip == $id)
+
+                    <tr>
+                        <td>{{ traduz_equip($action->id_equip) }}</td>
+                        <td>{{ traduz_task($action->id_task) }}</td>
+                        <td>{{ implode('/',array_reverse(explode('-', $action->data))) }}</td>
+                        <td>{{ $action->value }}</td>
+                        {{--                        <td>{{latitude($action->id_equip)}}</td>--}}
+                        {{--                        <td>{{$action->id_equip}}</td>--}}
+                    </tr>
+                @else
+                @endif
+            @endforeach
+
+            </tbody>
+        </table>
+    </div>
+
 @stop
 @endif
 @endforeach
+
+
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
