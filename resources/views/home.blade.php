@@ -582,7 +582,7 @@ if($action->data == request("d")){
                 </div>
                 <div class="card-body">
                     <div>
-                        <canvas style="height:400px !important;" id="myChart"></canvas>
+                        <canvas style="height:500px !important;" id="myChart"></canvas>
                     </div>
                 </div>
 
