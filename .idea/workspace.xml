@@ -2,6 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3adea33-234d-4238-bc74-c7c8160540e9" name="Changes" comment="">
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/dash_card.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/dash_card.blade.php" afterDir="false" />
+>>>>>>> kaio
       <change beforePath="$PROJECT_DIR$/resources/views/pages/dash_cosan.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/dash_cosan.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

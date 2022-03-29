@@ -149,7 +149,7 @@ function traduz_task($codigo)
 
     <div class="container">
 
-        <h2>Filtrar por campo</h2>
+        <h2>Série Histórica</h2>
 
         <br>
         <table class="table table-bordered table-striped">
@@ -164,7 +164,7 @@ function traduz_task($codigo)
             </tr>
             </thead>
             <tbody id="myTable">
-            @foreach($actions as $action)
+            @foreach($actions->sortByDesc('data') as $action)
                 @if($action->id_equip == $id)
 
                     <tr>
@@ -186,6 +186,8 @@ function traduz_task($codigo)
 @stop
 @endif
 @endforeach
+
+
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
