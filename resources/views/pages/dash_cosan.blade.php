@@ -147,6 +147,8 @@ function traduz_task($codigo)
         <canvas style="height:400px !important; flex-grow: 1" id="myChart"></canvas>
     </div>
 
+    
+
 @stop
 @endif
 @endforeach
