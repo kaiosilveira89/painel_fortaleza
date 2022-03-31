@@ -8,6 +8,8 @@ $red = 0;
 $redTotal = [];
 $task = 0;
 $dia = '';
+$total1 = [];
+$total2 = [];
 
 function traduz_equip($codigo)
 {
@@ -394,53 +396,62 @@ function filtraBaixo($codigo)
     }
 }
 
-foreach($actions as $action ){
-if($action->data == request("d")){
-
-    if($action->id_task == 1)
+foreach($actions as $action )
+    {
+        if($action->data == request("d"))
         {
-            $dia = $action->data;
-            $task = $action->id_task;
-            if ($action->value >= 70)
-            {
-                $green++;
-                array_push($greenTotal, $action->value);
-            }
-            elseif ($action->value >= 30 && $action->value < 70)
-            {
-                $yellow++;
-                array_push($yellowTotal, $action->value);
-            }
-            else
-            {
-                $red++;
-                array_push($redTotal, $action->value);
-            }
-        }
-    elseif ($action->id_task == 2)
-        {
-            $dia = $action->data;
-            $task = $action->id_task;
-            if ($action->value >= 700)
+            if($action->id_task == 1)
                 {
-                    $green++;
-                    array_push($greenTotal, $action->value);
-                }
-            elseif ($action->value >= 300 && $action->value < 700)
-                {
-                    $yellow++;
-                    array_push($yellowTotal, $action->value);
-                }
-            else
-                {
-                    $red++;
-                    array_push($redTotal, $action->value);
-                }
-        }
-    else {    }
-    }else {    }
-}
+                    array_push($total1, $action->value);
+                    $dia = $action->data;
+                    $task = $action->id_task;
+                    if ($action->value >= 70)
+                    {
+                        $green++;
+                        array_push($greenTotal, $action->value);
 
+                    }
+                    elseif ($action->value >= 30 && $action->value < 70)
+                    {
+                        $yellow++;
+                        array_push($yellowTotal, $action->value);
+                    }
+                    else
+                    {
+                        $red++;
+                        array_push($redTotal, $action->value);
+                    }
+                }
+            elseif ($action->id_task == 2)
+                {
+                    array_push($total2, $action->value);
+                    $dia = $action->data;
+                    $task = $action->id_task;
+                    if ($action->value >= 700)
+                        {
+                            $green++;
+                            array_push($greenTotal, $action->value);
+                        }
+                    elseif ($action->value >= 300 && $action->value < 700)
+                        {
+                            $yellow++;
+                            array_push($yellowTotal, $action->value);
+                        }
+                    else
+                        {
+                            $red++;
+                            array_push($redTotal, $action->value);
+                        }
+                }
+        else
+            {
+            }
+            $total = [$redTotal, $yellowTotal, $greenTotal];
+        }
+        else
+        {
+        }
+    }
 ?>
 
 @section('title', 'Dashboard')
@@ -476,7 +487,21 @@ if($action->data == request("d")){
 
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $actions->sum('value') }}</h3>
+
+                    <h3>
+
+                        @switch(request("t"))
+                            @case(1)
+                            {{array_sum($total1)}}
+                            @break
+
+                            @case(2)
+                            {{array_sum($total2)}}
+                            @break
+                        @endswitch
+
+                    </h3>
+
                     <p>Total de {{ traduz_task($task) }} Fornecidos em {{implode('/',array_reverse(explode('-', $dia)))}}</p>
                 </div>
 
@@ -768,9 +793,9 @@ if($action->data == request("d")){
                         @if ($action->value >= 70)
                             var parangaba = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
                         @elseif ($action->value < 70 && $action->value >= 30)
-                            var parangaba = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                            var parangaba = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
                         @else
-                            var parangaba = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                            var parangaba = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
                         @endif
                     @break
                     @case(2)
