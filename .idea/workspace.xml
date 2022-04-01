@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="6395b9d0-405d-440b-8817-f6784d4f61eb" name="Changes" comment="" />
+=======
     <list default="true" id="b3adea33-234d-4238-bc74-c7c8160540e9" name="Changes" comment="">
 <<<<<<< HEAD
 =======
@@ -10,6 +13,7 @@
 >>>>>>> kaio
       <change beforePath="$PROJECT_DIR$/resources/views/pages/dash_cosan.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/dash_cosan.blade.php" afterDir="false" />
     </list>
+>>>>>>> master
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
