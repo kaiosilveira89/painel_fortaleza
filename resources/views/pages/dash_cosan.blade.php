@@ -150,7 +150,8 @@ function traduz_task($codigo)
     <div class="container">
 
         <h2>Série Histórica</h2>
-
+        <p class="text-info">Filtrar por campo</p>
+        <input class="form-control" id="myInput" type="text" placeholder="Pesquisar..">
         <br>
         <table class="table table-bordered table-striped">
             <thead>
@@ -159,6 +160,7 @@ function traduz_task($codigo)
                 <th>AÇÃO</th>
                 <th>DATA</th>
                 <th>QUANTIDADE</th>
+                <th>AÇÃO</th>
                 {{--                        <th>TESTE</th>--}}
                 {{--                        <th>TESTE 2</th>--}}
             </tr>
@@ -172,6 +174,8 @@ function traduz_task($codigo)
                         <td>{{ traduz_task($action->id_task) }}</td>
                         <td>{{ implode('/',array_reverse(explode('-', $action->data))) }}</td>
                         <td>{{ $action->value }}</td>
+                        <td><button type="button" class="btn btn-warning">EDITAR&ensp;<i class="fa fa-pencil" aria-hidden="true"></i>
+                        </button></td>
                         {{--                        <td>{{latitude($action->id_equip)}}</td>--}}
                         {{--                        <td>{{$action->id_equip}}</td>--}}
                     </tr>
@@ -191,7 +195,7 @@ function traduz_task($codigo)
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
-
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
 @stop
 
@@ -200,6 +204,8 @@ function traduz_task($codigo)
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://kit.fontawesome.com/d8e2fcabdf.js" crossorigin="anonymous"></script>
 
 
     <script>
