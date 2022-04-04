@@ -170,11 +170,11 @@ function traduz_task($codigo)
                 @if($action->id_equip == $id)
 
                     <tr>
-                        <td>{{ traduz_equip($action->id_equip) }}</td>
-                        <td>{{ traduz_task($action->id_task) }}</td>
-                        <td>{{ implode('/',array_reverse(explode('-', $action->data))) }}</td>
-                        <td>{{ $action->value }}</td>
-                        <td><button type="button" class="btn btn-warning">EDITAR&ensp;<i class="fa fa-pencil" aria-hidden="true"></i>
+                        <td class="equipamento">{{ traduz_equip($action->id_equip) }}</td>
+                        <td class="task">{{ traduz_task($action->id_task) }}</td>
+                        <td class="data">{{ implode('/',array_reverse(explode('-', $action->data))) }}</td>
+                        <td class="valor">{{ $action->value }}</td>
+                        <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">EDITAR&ensp;<i class="fa fa-pencil" aria-hidden="true"></i>
                         </button></td>
                         {{--                        <td>{{latitude($action->id_equip)}}</td>--}}
                         {{--                        <td>{{$action->id_equip}}</td>--}}
@@ -186,6 +186,48 @@ function traduz_task($codigo)
             </tbody>
         </table>
     </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Editar Valor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="inputEquipamento">Equipamento</label>
+                  <input type="text" class="form-control" id="inputEquipamento" disabled>
+                </div>
+                <div class="form-group">
+                  <label for="inputTask">Ação</label>
+                  <input type="text" class="form-control" id="inputTask" disabled>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputData">Data</label>
+                        <input type="date" class="form-control" id="inputData" disabled>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputValor">Valor</label>
+                        <input type="number" class="form-control" id="inputValor">
+                    </div>
+                </div>
+                
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 @stop
 @endif
@@ -196,6 +238,7 @@ function traduz_task($codigo)
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    
 
 @stop
 
@@ -207,7 +250,7 @@ function traduz_task($codigo)
 
     <script src="https://kit.fontawesome.com/d8e2fcabdf.js" crossorigin="anonymous"></script>
 
-
+    
     <script>
         $(document).ready(function() {
             $("#myInput").on("keyup", function() {
@@ -219,7 +262,42 @@ function traduz_task($codigo)
         });
     </script>
 
+<script>
+   
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    });
 
+
+    $(document).on("click", ".btn-warning", function(){
+        var equipamento = $(this).closest('tr').find(".equipamento").text();
+        var task = $(this).closest('tr').find(".task").text();
+        var data = $(this).closest('tr').find(".data").text();
+        var valor = $(this).closest('tr').find(".valor").text();
+        var array = {
+            equipamento: equipamento,
+            task: task,
+            data: data,
+            valor: valor
+        }
+        
+        //Gambiarra pra botar a data no input
+        let dataFormatada = data.substr(6,4)+'-'+data.substr(3,2)+'-'+data.substr(0,2);
+
+
+        $('#inputEquipamento').val(equipamento);    
+        $('#inputTask').val(task);
+        $('#inputData').val(dataFormatada); 
+        $('#inputValor').val(valor);
+    });
+
+    $(document).on("click", ".btn-primary", function() {
+        alert(dataFormatada);
+    });
+
+
+
+</script>
 
     <script>
         const labels = [@foreach($actions->sortBy('data') as $action )
