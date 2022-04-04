@@ -165,13 +165,8 @@ function longitude($codigo)
         case 14:
             $longitude = -3.7374242;
             break;
-<<<<<<< Updated upstream
         case	15:
             $longitude	=	-3.736941523023261;
-=======
-        case 15:
-            $longitude = -3.7291766;
->>>>>>> Stashed changes
             break;
         case 16:
             $longitude = -3.7746614;
@@ -280,13 +275,8 @@ function latitude($codigo)
         case 14:
             $latitude = -38.6008863;
             break;
-<<<<<<< Updated upstream
         case	15:
             $latitude	=	-38.59019416931946;
-=======
-        case 15:
-            $latitude = -38.5902629;
->>>>>>> Stashed changes
             break;
         case 16:
             $latitude = -38.5705202;
@@ -393,99 +383,62 @@ function filtraBaixo($codigo)
     }
 }
 
-<<<<<<< Updated upstream
 foreach($actions as $action )
+{
+    if($action->data == request("d"))
     {
-        if($action->data == request("d"))
+        if($action->id_task == 1)
         {
-            if($action->id_task == 1)
-                {
-                    array_push($total1, $action->value);
-                    $dia = $action->data;
-                    $task = $action->id_task;
-                    if ($action->value >= 70)
-                    {
-                        $green++;
-                        array_push($greenTotal, $action->value);
-
-                    }
-                    elseif ($action->value >= 30 && $action->value < 70)
-                    {
-                        $yellow++;
-                        array_push($yellowTotal, $action->value);
-                    }
-                    else
-                    {
-                        $red++;
-                        array_push($redTotal, $action->value);
-                    }
-                }
-            elseif ($action->id_task == 2)
-                {
-                    array_push($total2, $action->value);
-                    $dia = $action->data;
-                    $task = $action->id_task;
-                    if ($action->value >= 700)
-                        {
-                            $green++;
-                            array_push($greenTotal, $action->value);
-                        }
-                    elseif ($action->value >= 300 && $action->value < 700)
-                        {
-                            $yellow++;
-                            array_push($yellowTotal, $action->value);
-                        }
-                    else
-                        {
-                            $red++;
-                            array_push($redTotal, $action->value);
-                        }
-                }
-        else
+            array_push($total1, $action->value);
+            $dia = $action->data;
+            $task = $action->id_task;
+            if ($action->value >= 70)
             {
+                $green++;
+                array_push($greenTotal, $action->value);
+
             }
-            $total = [$redTotal, $yellowTotal, $greenTotal];
+            elseif ($action->value >= 30 && $action->value < 70)
+            {
+                $yellow++;
+                array_push($yellowTotal, $action->value);
+            }
+            else
+            {
+                $red++;
+                array_push($redTotal, $action->value);
+            }
+        }
+        elseif ($action->id_task == 2)
+        {
+            array_push($total2, $action->value);
+            $dia = $action->data;
+            $task = $action->id_task;
+            if ($action->value >= 700)
+            {
+                $green++;
+                array_push($greenTotal, $action->value);
+            }
+            elseif ($action->value >= 300 && $action->value < 700)
+            {
+                $yellow++;
+                array_push($yellowTotal, $action->value);
+            }
+            else
+            {
+                $red++;
+                array_push($redTotal, $action->value);
+            }
         }
         else
         {
         }
+        $total = [$redTotal, $yellowTotal, $greenTotal];
     }
-=======
-foreach ($actions as $action) {
-    if ($action->data == request('d')) {
-        if ($action->id_task == 1) {
-            $dia = $action->data;
-            $task = $action->id_task;
-            if ($action->value >= 70) {
-                $green++;
-                array_push($greenTotal, $action->value);
-            } elseif ($action->value >= 30 && $action->value < 70) {
-                $yellow++;
-                array_push($yellowTotal, $action->value);
-            } else {
-                $red++;
-                array_push($redTotal, $action->value);
-            }
-        } elseif ($action->id_task == 2) {
-            $dia = $action->data;
-            $task = $action->id_task;
-            if ($action->value >= 700) {
-                $green++;
-                array_push($greenTotal, $action->value);
-            } elseif ($action->value >= 300 && $action->value < 700) {
-                $yellow++;
-                array_push($yellowTotal, $action->value);
-            } else {
-                $red++;
-                array_push($redTotal, $action->value);
-            }
-        } else {
-        }
-    } else {
+    else
+    {
     }
 }
-
->>>>>>> Stashed changes
 ?>
 
 @section('title', 'Dashboard')
@@ -505,7 +458,7 @@ foreach ($actions as $action) {
 
         <button class="form-control col-lg-1 ml-1" type="submit">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-                viewBox="0 0 16 16">
+                 viewBox="0 0 16 16">
                 <path
                     d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
             </svg>
@@ -523,7 +476,6 @@ foreach ($actions as $action) {
 
             <div class="small-box bg-info">
                 <div class="inner">
-<<<<<<< Updated upstream
 
                     <h3>
 
@@ -540,11 +492,6 @@ foreach ($actions as $action) {
                     </h3>
 
                     <p>Total de {{ traduz_task($task) }} Fornecidos em {{implode('/',array_reverse(explode('-', $dia)))}}</p>
-=======
-                    <h3>{{ $actions->sum('value') }}</h3>
-                    <p>Total de {{ traduz_task($task) }} Fornecidos em
-                        {{ implode('/', array_reverse(explode('-', $dia))) }}</p>
->>>>>>> Stashed changes
                 </div>
 
                 <div class="icon">
@@ -688,633 +635,393 @@ foreach ($actions as $action) {
             <br>
             <table class="table table-bordered table-striped">
                 <thead>
-                    <tr>
-                        <th>UNIDADE</th>
-                        <th>AÇÃO</th>
-                        <th>DATA</th>
-                        <th>QUANTIDADE</th>
-                        {{-- <th>TESTE</th> --}}
-                        {{-- <th>TESTE 2</th> --}}
-                    </tr>
+                <tr>
+                    <th>UNIDADE</th>
+                    <th>AÇÃO</th>
+                    <th>DATA</th>
+                    <th>QUANTIDADE</th>
+                    {{-- <th>TESTE</th> --}}
+                    {{-- <th>TESTE 2</th> --}}
+                </tr>
                 </thead>
                 <tbody id="myTable">
-                    @foreach ($actions as $action)
-                        @if ($action->data == request('d'))
-                            <tr>
-                                <td>{{ traduz_equip($action->id_equip) }}</td>
-                                <td>{{ traduz_task($action->id_task) }}</td>
-                                <td>{{ implode('/', array_reverse(explode('-', $action->data))) }}</td>
-                                <td>{{ $action->value }}</td>
-                                {{-- <td>{{latitude($action->id_equip)}}</td> --}}
-                                {{-- <td>{{$action->id_equip}}</td> --}}
-                            </tr>
-                        @else
-                        @endif
-                    @endforeach
+                @foreach ($actions as $action)
+                    @if ($action->data == request('d'))
+                        <tr>
+                            <td>{{ traduz_equip($action->id_equip) }}</td>
+                            <td>{{ traduz_task($action->id_task) }}</td>
+                            <td>{{ implode('/', array_reverse(explode('-', $action->data))) }}</td>
+                            <td>{{ $action->value }}</td>
+                            {{-- <td>{{latitude($action->id_equip)}}</td> --}}
+                            {{-- <td>{{$action->id_equip}}</td> --}}
+                        </tr>
+                    @else
+                    @endif
+                @endforeach
 
                 </tbody>
             </table>
         </div>
 
 
-    @stop
+        @stop
 
-    @section('css')
-        <link rel="stylesheet" href="/css/admin_custom.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-            crossorigin="" />
+        @section('css')
+            <link rel="stylesheet" href="/css/admin_custom.css">
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+                  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+                  crossorigin="" />
 
-    @stop
+        @stop
 
-    @section('js')
+        @section('js')
 
-        <script src="https://kit.fontawesome.com/d8e2fcabdf.js" crossorigin="anonymous"></script>
+            <script src="https://kit.fontawesome.com/d8e2fcabdf.js" crossorigin="anonymous"></script>
 
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-                integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-                crossorigin="">
-        </script>
+            <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+                    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+                    crossorigin="">
+            </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        <script>
-            $(document).ready(function() {
-                $("#myInput").on("keyup", function() {
-                    var value = $(this).val().toLowerCase();
-                    $("#myTable tr").filter(function() {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            <script>
+                $(document).ready(function() {
+                    $("#myInput").on("keyup", function() {
+                        var value = $(this).val().toLowerCase();
+                        $("#myTable tr").filter(function() {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                        });
                     });
                 });
-            });
-        </script>
+            </script>
 
-        <script>
-            const data = {
-                labels: [
-                    'Baixo',
-                    'Alto',
-                    'Médio'
-                ],
-                datasets: [{
-                    data: [{{ array_sum($redTotal) }}, {{ array_sum($greenTotal) }},
-                        {{ array_sum($yellowTotal) }}
+            <script>
+                const data = {
+                    labels: [
+                        'Baixo',
+                        'Alto',
+                        'Médio'
                     ],
-                    backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(96, 209, 120)',
-                        'rgb(255, 205, 86)'
-                    ],
-                    hoverOffset: 20
-                }]
-            };
+                    datasets: [{
+                        data: [{{ array_sum($redTotal) }}, {{ array_sum($greenTotal) }},
+                            {{ array_sum($yellowTotal) }}
+                        ],
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(96, 209, 120)',
+                            'rgb(255, 205, 86)'
+                        ],
+                        hoverOffset: 20
+                    }]
+                };
 
-            const config = {
-                type: 'pie',
-                data: data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    layout: {
-                        padding: 20
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            fontSize: 30
+                const config = {
+                    type: 'pie',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: {
+                            padding: 20
+                        },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                fontSize: 30
+                            }
+
                         }
 
                     }
 
-                }
+                };
 
-            };
+                const myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config
+                );
+            </script>
 
-            const myChart = new Chart(
-                document.getElementById('myChart'),
-                config
-            );
-        </script>
+            <script>
+                var greenIcon = new L.Icon({
+                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
+                var orangeIcon = new L.Icon({
+                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
+                var redIcon = new L.Icon({
+                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
 
-        <script>
-            var greenIcon = new L.Icon({
-                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
-                popupAnchor: [1, -34],
-                shadowSize: [41, 41]
-            });
-            var orangeIcon = new L.Icon({
-                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
-                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
-                popupAnchor: [1, -34],
-                shadowSize: [41, 41]
-            });
-            var redIcon = new L.Icon({
-                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
-                popupAnchor: [1, -34],
-                shadowSize: [41, 41]
-            });
+                var parangaba, bandeira, manoel, social1, social2, refeitorio, barra, jacarecanga, lagamar, futuro, mucuripe,
+                    serviluz, bela_vista, quintino_cunha,
+                    ant_bezerra, pres_kennedy, joao_23, messejana;
 
-            var parangaba, bandeira, manoel, social1, social2, refeitorio, barra, jacarecanga, lagamar, futuro, mucuripe,
-                serviluz, bela_vista, quintino_cunha,
-                ant_bezerra, pres_kennedy, joao_23, messejana;
-
-<<<<<<< Updated upstream
-            @foreach($actions as $action)
+                @foreach($actions as $action)
                 @if($action->data == request("d"))
-                    @switch($action->id_task)
-                        @case(1)
-                            @switch($action->id_equip)
-                                    @case(1)
-                                        @if ($action->value >= 70)
-                                            var parangaba = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @elseif ($action->value < 70 && $action->value >= 30)
-                                            var parangaba = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @else
-                                            var parangaba = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @endif
-                                    @break
-                                    @case(2)
-                                        @if ($action->value >= 70)
-                                            var bandeira = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @elseif ($action->value < 70 && $action->value >= 30)
-                                            var bandeira = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @else
-                                            var bandeira = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @endif
-                                    @break
-                                    @case(3)
-                                        @if ($action->value >= 70)
-                                            var manoel = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @elseif ($action->value < 70 && $action->value >= 30)
-                                            var manoel = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @else
-                                            var manoel = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @endif
-                                    @break
-                                    @case(4)
-                                        @if ($action->value >= 70)
-                                            var social1 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @elseif ($action->value < 70 && $action->value >= 30)
-                                            var social1 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @else
-                                            var social1 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @endif
-                                    @break
-                                    @case(5)
-                                        @if ($action->value >= 70)
-                                            var social2 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @elseif ($action->value < 70 && $action->value >= 30)
-                                            var social2 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @else
-                                            var social2 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @endif
-                                    @break
-                                    @case(6)
-                                        @if ($action->value >= 70)
-                                            var refeitorio = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @elseif ($action->value < 70 && $action->value >= 30)
-                                            var refeitorio = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @else
-                                            var refeitorio = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                        @endif
-                                    @break
-                                    @default
-                            @endswitch
-                        @break
-                        @case(2)
-                            @switch($action->id_equip)
-                                @case(7)
-                                    @if ($action->value >= 700)
-                                        var barra = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @elseif ($action->value < 700 && $action->value >= 300)
-                                        var barra = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @else
-                                        var barra = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @endif
-                                    @break
-                                @case(8)
-                                    @if ($action->value >= 700)
-                                        var jacarecanga = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @elseif ($action->value < 700 && $action->value >= 300)
-                                        var jacarecanga = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @else
-                                        var jacarecanga = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @endif
-                                    @break
-                                @case(9)
-                                    @if ($action->value >= 700)
-                                        var lagamar = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @elseif ($action->value < 700 && $action->value >= 300)
-                                        var lagamar = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @else
-                                        var lagamar = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @endif
-                                    @break
-                                @case(10)
-                                    @if ($action->value >= 700)
-                                        var futuro =  L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @elseif ($action->value < 700 && $action->value >= 300)
-                                        var futuro = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @else
-                                        var futuro = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @endif
-                                    @break
-                                @case(11)
-                                    @if ($action->value >= 700)
-                                       var mucuripe = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @elseif ($action->value < 700 && $action->value >= 300)
-                                      var mucuripe = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @else
-                                      var mucuripe = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @endif
-                                    @break
-                                @case(12)
-                                    @if ($action->value >= 700)
-                                      var serviluz = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @elseif ($action->value < 700 && $action->value >= 300)
-                                      var serviluz = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @else
-                                      var serviluz = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @endif
-                                    @break
-                                @case(13)
-                                    @if ($action->value >= 700)
-                                       var bela_vista = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @elseif ($action->value < 700 && $action->value >= 300)
-                                      var bela_vista = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @else
-                                      var bela_vista = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @endif
-                                    @break
-                                @case(14)
-                                    @if ($action->value >= 700)
-                                       var quintino_cunha = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @elseif ($action->value < 700 && $action->value >= 300)
-                                       var quintino_cunha = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @else
-                                        var quintino_cunha = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @endif
-                                    @break
-                                @case(15)
-                                    @if ($action->value >= 700)
-                                       var ant_bezerra = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @elseif ($action->value < 700 && $action->value >= 300)
-                                       var ant_bezerra = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @else
-                                       var ant_bezerra = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @endif
-                                    @break
-                                @case(16)
-                                    @if ($action->value >= 700)
-                                       var pres_kennedy = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @elseif ($action->value < 700 && $action->value >= 300)
-                                        var pres_kennedy = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @else
-                                        var pres_kennedy = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @endif
-                                    @break
-                                @case(17)
-                                    @if ($action->value >= 700)
-                                       var joao_23 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @elseif ($action->value < 700 && $action->value >= 300)
-                                        var joao_23 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @else
-                                       var joao_23 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @endif
-                                    @break
-                                @case(18)
-                                    @if ($action->value >= 700)
-                                        var messejana = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @elseif ($action->value < 700 && $action->value >= 300)
-                                        var messejana = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @else
-                                        var messejana = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
-                                    @endif
-                                    @break
-                               @default
-                            @endswitch
-                        @break
-=======
-            @foreach ($actions as $action)
-                @if ($action->data == request('d'))
-                    @switch($action->id_equip)
-                        @case(1)
-                            @if ($action->value >= 70)
-                                var parangaba = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 70 && $action->value >= 30)
-                                var parangaba = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var parangaba = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(2)
-                            @if ($action->value >= 70)
-                                var bandeira = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 70 && $action->value >= 30)
-                                var bandeira = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var bandeira = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(3)
-                            @if ($action->value >= 70)
-                                var manoel = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 70 && $action->value >= 30)
-                                var manoel = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var manoel = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(4)
-                            @if ($action->value >= 70)
-                                var social1 = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 70 && $action->value >= 30)
-                                var social1 = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var social1 = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(5)
-                            @if ($action->value >= 70)
-                                var social2 = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 70 && $action->value >= 30)
-                                var social2 = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var social2 = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(6)
-                            @if ($action->value >= 70)
-                                var refeitorio = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 70 && $action->value >= 30)
-                                var refeitorio = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var refeitorio = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(7)
-                            @if ($action->value >= 700)
-                                var barra = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 700 && $action->value >= 300)
-                                var barra = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var barra = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(8)
-                            @if ($action->value >= 700)
-                                var jacarecanga = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 700 && $action->value >= 300)
-                                var jacarecanga = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var jacarecanga = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(9)
-                            @if ($action->value >= 700)
-                                var lagamar = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 700 && $action->value >= 300)
-                                var lagamar = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var lagamar = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(10)
-                            @if ($action->value >= 700)
-                                var futuro = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 700 && $action->value >= 300)
-                                var futuro = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var futuro = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(11)
-                            @if ($action->value >= 700)
-                                var mucuripe = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 700 && $action->value >= 300)
-                                var mucuripe = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var mucuripe = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(12)
-                            @if ($action->value >= 700)
-                                var serviluz = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 700 && $action->value >= 300)
-                                var serviluz = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var serviluz = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(13)
-                            @if ($action->value >= 700)
-                                var bela_vista = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 700 && $action->value >= 300)
-                                var bela_vista = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var bela_vista = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(14)
-                            @if ($action->value >= 700)
-                                var quintino_cunha = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}],
-                                {icon: greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 700 && $action->value >= 300)
-                                var quintino_cunha = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}],
-                                {icon: orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var quintino_cunha = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}],
-                                {icon: redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(15)
-                            @if ($action->value >= 700)
-                                var ant_bezerra = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 700 && $action->value >= 300)
-                                var ant_bezerra = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var ant_bezerra = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(16)
-                            @if ($action->value >= 700)
-                                var pres_kennedy = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 700 && $action->value >= 300)
-                                var pres_kennedy = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var pres_kennedy = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(17)
-                            @if ($action->value >= 700)
-                                var joao_23 = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 700 && $action->value >= 300)
-                                var joao_23 = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var joao_23 = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
-                        @case(18)
-                            @if ($action->value >= 700)
-                                var messejana = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                greenIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @elseif ($action->value < 700 && $action->value >= 300)
-                                var messejana = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                orangeIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @else
-                                var messejana = L.marker([{{ longitude($action->id_equip) }}, {{ latitude($action->id_equip) }}], {icon:
-                                redIcon}).bindPopup('{{ traduz_equip($action->id_equip) }}')
-                            @endif
-                        @break
-                
->>>>>>> Stashed changes
-                        @default
-                    @endswitch
+                @switch($action->id_task)
+                @case(1)
+                @switch($action->id_equip)
+                @case(1)
+                @if ($action->value >= 70)
+                var parangaba = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 70 && $action->value >= 30)
+                var parangaba = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var parangaba = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(2)
+                @if ($action->value >= 70)
+                var bandeira = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 70 && $action->value >= 30)
+                var bandeira = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var bandeira = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(3)
+                @if ($action->value >= 70)
+                var manoel = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 70 && $action->value >= 30)
+                var manoel = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var manoel = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(4)
+                @if ($action->value >= 70)
+                var social1 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 70 && $action->value >= 30)
+                var social1 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var social1 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(5)
+                @if ($action->value >= 70)
+                var social2 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 70 && $action->value >= 30)
+                var social2 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var social2 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(6)
+                @if ($action->value >= 70)
+                var refeitorio = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 70 && $action->value >= 30)
+                var refeitorio = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var refeitorio = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @default
+                @endswitch
+                @break
+                @case(2)
+                @switch($action->id_equip)
+                @case(7)
+                @if ($action->value >= 700)
+                var barra = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 700 && $action->value >= 300)
+                var barra = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var barra = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(8)
+                @if ($action->value >= 700)
+                var jacarecanga = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 700 && $action->value >= 300)
+                var jacarecanga = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var jacarecanga = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(9)
+                @if ($action->value >= 700)
+                var lagamar = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 700 && $action->value >= 300)
+                var lagamar = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var lagamar = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(10)
+                @if ($action->value >= 700)
+                var futuro =  L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 700 && $action->value >= 300)
+                var futuro = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var futuro = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(11)
+                @if ($action->value >= 700)
+                var mucuripe = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 700 && $action->value >= 300)
+                var mucuripe = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var mucuripe = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(12)
+                @if ($action->value >= 700)
+                var serviluz = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 700 && $action->value >= 300)
+                var serviluz = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var serviluz = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(13)
+                @if ($action->value >= 700)
+                var bela_vista = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 700 && $action->value >= 300)
+                var bela_vista = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var bela_vista = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(14)
+                @if ($action->value >= 700)
+                var quintino_cunha = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 700 && $action->value >= 300)
+                var quintino_cunha = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var quintino_cunha = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(15)
+                @if ($action->value >= 700)
+                var ant_bezerra = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 700 && $action->value >= 300)
+                var ant_bezerra = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var ant_bezerra = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(16)
+                @if ($action->value >= 700)
+                var pres_kennedy = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 700 && $action->value >= 300)
+                var pres_kennedy = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var pres_kennedy = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(17)
+                @if ($action->value >= 700)
+                var joao_23 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 700 && $action->value >= 300)
+                var joao_23 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var joao_23 = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @case(18)
+                @if ($action->value >= 700)
+                var messejana = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: greenIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @elseif ($action->value < 700 && $action->value >= 300)
+                var messejana = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: orangeIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @else
+                var messejana = L.marker([{{longitude($action->id_equip)}}, {{latitude($action->id_equip)}}], {icon: redIcon}).bindPopup('{{traduz_equip($action->id_equip)}}')
+                @endif
+                @break
+                @default
+                @endswitch
+                @break
+                @default
+                @endswitch
                 @else
                 @endif
-            @endforeach
+                @endforeach
 
 
-            var layoutMap = L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=UnzREsu8qEQLLAK8XZGn', {
-                attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
-            });
+                var layoutMap = L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=UnzREsu8qEQLLAK8XZGn', {
+                    attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+                });
 
-            @foreach ($actions as $action)
+                @foreach ($actions as $action)
                 @if ($action->data == request('d'))
-                    @switch($action->id_task)
-                        @case(1)
-                            var map = L.map('map', {
-                            //center: [-3.76838, -38.535683],
-                            center: [-3.771421, -38.538151],
-                            zoom: 12,
-                            layers: [layoutMap, parangaba, bandeira, manoel, social1, social2, refeitorio]
-                            });
-                        @break
-                
-                        @case(2)
-                            var map = L.map('map', {
-                            //center: [-3.76838, -38.535683],
-                            center: [-3.771421, -38.538151],
-                            zoom: 12,
-                            layers: [layoutMap, barra, jacarecanga, lagamar, futuro, mucuripe, serviluz, bela_vista, quintino_cunha,
-                            ant_bezerra, pres_kennedy, joao_23, messejana]
-                            });
-                        @break
-                    @endswitch
+                @switch($action->id_task)
+                @case(1)
+                var map = L.map('map', {
+                    //center: [-3.76838, -38.535683],
+                    center: [-3.771421, -38.538151],
+                    zoom: 12,
+                    layers: [layoutMap, parangaba, bandeira, manoel, social1, social2, refeitorio]
+                });
+                @break
+
+                @case(2)
+                var map = L.map('map', {
+                    //center: [-3.76838, -38.535683],
+                    center: [-3.771421, -38.538151],
+                    zoom: 12,
+                    layers: [layoutMap, barra, jacarecanga, lagamar, futuro, mucuripe, serviluz, bela_vista, quintino_cunha,
+                        ant_bezerra, pres_kennedy, joao_23, messejana]
+                });
+                @break
+                @endswitch
                 @else
                 @endif
-            @endforeach
+                @endforeach
 
-            var baseMaps = {
-                "OpenStreetMap": layoutMap
+                var baseMaps = {
+                    "OpenStreetMap": layoutMap
 
-            };
+                };
 
-            var overlayMaps = {
-                "<strong>EQUIPAMENTOS</strong>": equip,
-            };
+                var overlayMaps = {
+                    "<strong>EQUIPAMENTOS</strong>": equip,
+                };
 
-            L.control.layers(baseMaps, overlayMaps).addTo(map);
-        </script>
-    @stop
+                L.control.layers(baseMaps, overlayMaps).addTo(map);
+            </script>
+@stop
 
 
-    {{-- @extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">{{ __('Dashboard') }}</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+            <div class="card-body">
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
 
-                    {{ __('You are logged in!') }}
-                </div>
+                {{ __('You are logged in!') }}
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection --}}
