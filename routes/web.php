@@ -39,7 +39,6 @@ Route::get('/admincras', function () {
 Route::resource('dashall', CardController::class);
 
 
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

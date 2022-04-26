@@ -135,7 +135,7 @@ function	traduz_task($codigo)
             <option value="2">Vale-Gás</option>
         </select>
 
-        <input type="date" class="form-control col-lg-3" name="d">
+        <input type="date" class="form-control col-lg-2" name="d" style="margin-left: 5px">
 
         <button class="form-control col-lg-1 ml-1" type="submit">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">

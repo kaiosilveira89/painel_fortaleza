@@ -131,13 +131,30 @@ function traduz_task($codigo)
     @if( $action->id_equip == $id)
 @section('content_header')
 
-
-
-    <h1>DEMONSTRATIVO</h1>
-    <h1>AÇÃO: {{ traduz_task($action->id_task) }}</h1>
-    <h1>{{ traduz_equip($action->id_equip) }}</h1>
-
-
+    <div style="display:flex;  justify-content: space-around;">
+        <div>
+            <h1>DEMONSTRATIVO</h1>
+            <h1>AÇÃO: {{ traduz_task($action->id_task) }}</h1>
+            <h1>{{ traduz_equip($action->id_equip) }}</h1>
+        </div>
+        <div> 
+            <form>
+                <div class="row">
+                    <div class="form-group"  style="margin-right:1rem">
+                        <label for="dataInicial">Data Inicial</label>
+                        <input type="date" id="dataInicial" name="dataInicial" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="dataFinal">Data Final</label>
+                        <input type="date" id="dataFinal" name="dataFinal" class="form-control">
+                    </div>
+                </div>
+                    <button style="width: 100%;"  class="btn btn-primary">
+                        Filtrar
+                    </button>
+              </form>
+        </div>
+    </div>
 @stop
 
 @section('content')
@@ -156,6 +173,7 @@ function traduz_task($codigo)
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
+                <th>ID</th>
                 <th>UNIDADE</th>
                 <th>AÇÃO</th>
                 <th>DATA</th>
@@ -170,14 +188,13 @@ function traduz_task($codigo)
                 @if($action->id_equip == $id)
 
                     <tr>
-                        <td>{{ traduz_equip($action->id_equip) }}</td>
-                        <td>{{ traduz_task($action->id_task) }}</td>
-                        <td>{{ implode('/',array_reverse(explode('-', $action->data))) }}</td>
-                        <td>{{ $action->value }}</td>
-                        <td><button type="button" class="btn btn-warning">EDITAR&ensp;<i class="fa fa-pencil" aria-hidden="true"></i>
+                        <td class="id">{{$action->id_action}}</td>
+                        <td class="equipamento">{{ traduz_equip($action->id_equip) }}</td>
+                        <td class="task">{{ traduz_task($action->id_task) }}</td>
+                        <td class="data">{{ implode('/',array_reverse(explode('-', $action->data))) }}</td>
+                        <td class="valor">{{ $action->value }}</td>
+                        <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">EDITAR&ensp;<i class="fa fa-pencil" aria-hidden="true"></i>
                         </button></td>
-                        {{--                        <td>{{latitude($action->id_equip)}}</td>--}}
-                        {{--                        <td>{{$action->id_equip}}</td>--}}
                     </tr>
                 @else
                 @endif
@@ -186,6 +203,53 @@ function traduz_task($codigo)
             </tbody>
         </table>
     </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Editar Valor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <label for="inputId">ID</label>
+                    <input id="inputId" type="interger" class="form-control" name="id_action">
+                </div>
+                <div class="form-group">
+                  <label for="inputEquipamento">Equipamento</label>
+                  <input type="text" class="form-control" id="inputEquipamento" disabled>
+                </div>
+                <div class="form-group">
+                  <label for="inputTask">Ação</label>
+                  <input type="text" class="form-control" id="inputTask" disabled>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputData">Data</label>
+                        <input id="inputData" type="date" class="form-control" name="data" disabled=>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputValor">Valor</label>
+                        <input id="value" type="interger" class="form-control" name="value">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                </div>
+              </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 
 @stop
 @endif
@@ -196,6 +260,7 @@ function traduz_task($codigo)
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
 
 @stop
 
@@ -219,7 +284,44 @@ function traduz_task($codigo)
         });
     </script>
 
+<script>
 
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    });
+
+
+    $(document).on("click", ".btn-warning", function(){
+        var id = $(this).closest('tr').find(".id").text();
+        var equipamento = $(this).closest('tr').find(".equipamento").text();
+        var task = $(this).closest('tr').find(".task").text();
+        var data = $(this).closest('tr').find(".data").text();
+        var valor = $(this).closest('tr').find(".valor").text();
+        var array = {
+            id: id,
+            equipamento: equipamento,
+            task: task,
+            data: data,
+            valor: valor
+        }
+
+        //Gambiarra pra botar a data no input
+        let dataFormatada = data.substr(6,4)+'-'+data.substr(3,2)+'-'+data.substr(0,2);
+
+        $('#inputId').val(id);
+        $('#inputEquipamento').val(equipamento);
+        $('#inputTask').val(task);
+        $('#inputData').val(dataFormatada);
+        $('#inputValor').val(valor);
+    });
+
+    $(document).on("click", ".btn-primary", function() {
+        alert(dataFormatada);
+    });
+
+
+
+</script>
 
     <script>
         const labels = [@foreach($actions->sortBy('data') as $action )

@@ -10,6 +10,7 @@ class Action extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id_action',
         'id_equip',
         'id_task',
         'value',

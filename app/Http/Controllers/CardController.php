@@ -36,7 +36,7 @@ class CardController extends Controller
 
         if(request("t"))
             $actions = $this->actionService->search("id_task", date(\request("t")));
-
+        
         return view('pages/dash_all', ['actions'=>$actions]);
     }
 
@@ -79,7 +79,15 @@ class CardController extends Controller
      */
     public function show($id)
     {
-        $actions = Action::all();
+        //$actions = Action::all();
+        if(request('dataInicial') && request('dataFinal')){
+            $actions = Action::whereBetween('data', array(request('dataInicial'), request('dataFinal')))->get();
+        } else {
+            $actions = Action::all();
+        }
+        
+        //$actions = Action::whereBetween('data', array(request('dataInicial'), request('dataInicial')))->get();
+
         return view('pages/dash_cosan', ['actions'=>$actions, 'id'=>$id]);
     }
 
@@ -91,7 +99,13 @@ class CardController extends Controller
      */
     public function edit($id)
     {
-
+        $actions = Action::with('$id', $id)->first();
+        if(!empty($actions))
+        {
+            return view('pages/edit', ['actions'=>$actions]);
+        } else {
+            return redirect()->route('pages/dash_cosan');
+        }
     }
 
     /**
@@ -101,9 +115,18 @@ class CardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $data = [
+            'value' => $request->value,
+        ];
+
+
+            Action::where("id_action", $request->id_action)->update($data);
+
+            return redirect()->route('dashall.index')->with(
+                ["success" => "Atualizado com Sucesso!"]
+            );
     }
 
     /**
@@ -114,9 +137,7 @@ class CardController extends Controller
      */
     public function destroy($id)
     {
-        $actions = Action::findOrFail($id);
-        $actions->delete();
-        return "Registro deletado com sucesso!";
+
 
     }
 }
